@@ -1,0 +1,255 @@
+HTML CODE
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Search Engine Interface</title>
+    <style>
+  
+  body {
+			background-color: black;
+		}
+
+		canvas {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+		}
+   
+    /* Gradient animation */
+   body {
+        background: linear-gradient(45deg, #000000, #6a5279, #533b8f, #444, #412323);
+        background-size: 400% 400%;
+        animation: gradient 10s ease infinite;
+      }
+      
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      
+      /* Add transition animation */
+      input[type="text"], input[type="submit"] {
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -ms-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+      }
+      
+      /* Style the search box */
+      .search-box {
+        margin: 100px auto;
+        width: 400px;
+        height: 50px;
+        position: relative;
+      }
+      
+      .search-box input[type="text"] {
+        width: 100%;
+        height: 50px;
+        padding: 0 20px;
+        border: none;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.7);
+        font-size: 18px;
+        font-weight: bold;
+        color: #444;
+        box-shadow: 2px 2px 10px #a07aff;
+        
+      }
+      
+      .search-box input[type="submit"] {
+        width: 50px;
+        height: 50px;
+        border: none;
+        border-radius: 50%;
+        background: #fff;
+        color: #a07aff;
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+        box-shadow: 2px 2px 10px #a07aff;
+        
+      }
+      
+      .search-box input[type="submit"]:hover {
+        background: #a07aff;
+        color: #fff;
+        box-shadow: 2px 2px 20px #a07aff;
+      }
+
+      
+      /* Add circular mouse tracking effect */
+      .search-box:before {
+        content: "";
+        position:absolute;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        opacity: 0.3;
+        background: #a07aff;
+        top: -50px;
+        left: -50px;
+        z-index: -1;
+        transform: scale(0);
+        transition: all 0.3s ease-in-out;
+      }
+      
+      .search-box:hover:before {
+        transform: scale(1);
+      }
+
+    </style>
+  </head>
+     <canvas id="canvas"></canvas>
+  
+    <script>
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+  
+      let mouse = {
+        x: 0,
+        y: 0,
+      };
+  
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+  
+      function drawGlow() {
+        const gradient = ctx.createRadialGradient(
+          mouse.x, mouse.y, 0,
+          mouse.x, mouse.y, 100
+        );
+  
+        gradient.addColorStop(0, 'rgba(255, 192, 203, 0.7)');
+        gradient.addColorStop(1, 'rgba(255, 192, 203, 0)');
+  
+        ctx.fillStyle = gradient;
+        ctx.filter = 'blur(20px)';
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 200, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      
+  
+      function loop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawGlow();
+        requestAnimationFrame(loop);
+      }
+  
+      window.addEventListener('resize', resizeCanvas);
+      canvas.addEventListener('mousemove', function(event) {
+        mouse.x = event.clientX;
+        mouse.y = event.clientY;
+      });
+  
+      resizeCanvas();
+      loop();
+    </script>
+  </body>
+  <body>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <div class="search-box">
+      <form action="#">
+        <input type="text" placeholder="Search...">
+        <input type="submit" value="Go">
+      </form>
+    </div>
+    <section class="news">
+      <h2>Latest News</h2>
+      <ul>
+        <li>
+          <h3>Headline 1</h3>
+          <p>The World Health Organization (WHO) has announced that it will be setting up a hub in Berlin, Germany, to help develop new tools and technologies to prevent and respond to future pandemics. The new hub, which is expected to start operating this year, will be part of a global network of centers aimed at improving the world's preparedness for future health</p>
+          <p1>emergencies. According to the WHO, the Berlin hub will focus on areas such as digital health, artificial intelligence, and pandemic forecasting, among others. The initiative is being funded by Germany and supported by other countries and organizations.</p1>
+        </li>
+        <li>
+          <h3>Headline 2</h3>
+          <p>NASA's Perseverance rover, which landed on Mars in February 2021, has successfully collected its first rock sample on the red planet. The sample, about the size of a piece of chalk, was drilled from a rock dubbed "Rochette" in a region called "Cratered Floor Fractured Rough" and stored in a tube inside the rover. The sample will be analyzed by the rover's onboard instruments to determine its composition and history, and could provide new insights into the geology and potential habitability of Mars. This marks the first time that a sample has been collected from Mars that could eventually be returned to Earth for further analysis.</p>
+        </li>
+        <li>
+          <h3>Headline 3</h3>
+          <p>In a landmark decision, the United States Food and Drug Administration (FDA) has granted full approval to Pfizer-BioNTech's COVID-19 vaccine for people aged 16 and over. The vaccine had previously been authorized for emergency use by the FDA in December 2020. With this approval, the vaccine becomes the first COVID-19 vaccine to receive full approval from the FDA, and is expected to help boost vaccination rates in the United States. The Pfizer-BioNTech vaccine has been shown to be highly effective at preventing COVID-19 and its severe complications, and has already been administered to millions of people around the world.</p>
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>
+
+
+
+
+CSS CODE
+.news li {
+    border: 1px solid #ccc;
+    position: absolute;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 10px;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .news li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .news li::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+    z-index: -1;
+  }
+  
+  .news li:hover::after {
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+  }
+  
+  
+  
+  JAVASCRIPT CODE
+  const menuBtn = document.querySelector('.menu-btn');
+const menu = document.querySelector('.menu');
+
+menuBtn.addEventListener('click', function() {
+  menuBtn.classList.toggle('open');
+});
+
+$(document).ready(function() {
+    $('.box').each(function() {
+      var boxTop = $(this).offset().top;
+      var windowBottom = $(window).height() + $(window).scrollTop();
+      if (boxTop < windowBottom) {
+        $(this).addClass('animate');
+      }
+    });
+    $(window).scroll(function() {
+      $('.box').each(function() {
+        var boxTop = $(this).offset().top;
+        var windowBottom = $(window).height() + $(window).scrollTop();
+        if (boxTop < windowBottom) {
+          $(this).addClass('animate');
+        }
+      });
+    });
+  });
